@@ -1,13 +1,18 @@
 class Tournament
   class << self
 
-    TITLE = "Team                           | MP |  W |  D |  L |  P\n"
     LINE_FORMAT = '%-31s| %2s | %2s | %2s | %2s | %2s'.freeze
 
     def tally(input)
       records = parse_data(input.strip)
 
-      output = TITLE
+      output = format(LINE_FORMAT,
+                      'Team',
+                      'MP',
+                      'W',
+                      'D',
+                      'L',
+                      'P').concat("\n")
       sort_teams_alphabetically(records).each do |record|
         output << format(LINE_FORMAT,
                          record[:team],
@@ -17,7 +22,6 @@ class Tournament
                          record[:l],
                          record[:p]).concat("\n")
       end
-      puts output
       output
     end
 
